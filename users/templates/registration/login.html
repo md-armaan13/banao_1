@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Banao</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+        {% load static %}
+       
+    </head>
+    <body>
+    
+        <div class="lg:flex">
+            <div class="lg:w-1/2 xl:max-w-screen-m w-1/2 vw-50">
+                <div class="pt-9 flex justify-center lg:justify-start lg:px-12 pb-8">
+                    <div class="cursor-pointer flex items-center">
+                        <div>
+                            <img class=" h-auto" src="{% static 'common/images/banao-3.png' %}"> </img>
+                        </div>
+                     
+                    </div>
+                </div>
+                <div class="mt-8 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-1 xl:px-24 xl:max-w-2xl">
+                    <h2 class="text-center text-4xl text-black font-display font-semibold lg:text-left xl:text-5xl
+                    xl:text-bold">Log in</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                    
+                    <div class="mt-12">
+                        
+                            <div>
+                                <div class="text-sm font-bold text-gray-700 tracking-wide">Email Address</div>
+                                <input class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="" placeholder="admin@gmail.com" name="email">
+                            </div>
+                            <div class="mt-8">
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm font-bold text-gray-700 tracking-wide">
+                                        Password
+                                    </div>
+                                    
+                                </div>
+                                <input class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="" placeholder="admin123" name="password">
+                            </div>
+                            <div class="mt-10">
+                                <button class="bg-black text-gray-100 p-4 w-full rounded-full tracking-wide
+                                font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
+                                shadow-lg" style="transition-delay: 0.1s; transition-duration: 0.5s;" type="submit">
+                                    Log In
+                                </button>
+                            </div>
+                        </form>
+                        <div class="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
+                            Don't have an account ? <a href="{% url 'users.signup' %}" class="cursor-pointer text-indigo-600 hover:text-indigo-800">Sign up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center justify-center bg-indigo-100 flex-1 h-screen">
+                
+                    <img  class="" src="{% static 'common/images/photo3.gif' %}" alt="" style="height: 400px; width: 400px;">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
