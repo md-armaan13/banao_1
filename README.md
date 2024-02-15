@@ -12,6 +12,13 @@ Screenshots:
 
 ![Screenshot of Cron dialog](/static/common/images/musicpage.png "Cron Dialog")
 
+##
+![Screenshot of Cron dialog](/static/common/images/blog.png "Cron Dialog")
+
+##
+![Screenshot of Cron dialog](/static/common/images/createblog.png "Cron Dialog")
+
+
 
 ## Setting Up for Development
 
