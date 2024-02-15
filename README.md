@@ -1,4 +1,4 @@
-# Banao
+# My Favourites Tunes
 
 
 
@@ -13,11 +13,12 @@ Screenshots:
 ![Screenshot of Cron dialog](/static/common/images/musicpage.png "Cron Dialog")
 
 ##
-![Screenshot of Cron dialog](/static/common/images/blog.png "Cron Dialog")
+
+![Screenshot of Cron dialog](/static/common/images/blog.jpg "Cron Dialog")
 
 ##
-![Screenshot of Cron dialog](/static/common/images/createblog.png "Cron Dialog")
 
+![Screenshot of Cron dialog](/static/common/images/createblog.jpg "Cron Dialog")
 
 
 ## Setting Up for Development
