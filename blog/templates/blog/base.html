@@ -11,6 +11,14 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     {% load static %}
     <style>
+      .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    }
+
+    .hide-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
 
         .background-animate {
           background-size: 400%;

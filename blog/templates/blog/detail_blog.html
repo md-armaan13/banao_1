@@ -1,0 +1,135 @@
+{% extends "blog/base.html" %}
+{% load static %}
+   {% block content%}
+<div class="bg-gradient-to-r
+     from-pink-100
+     via-pink-200
+     to-pink-300
+     background-animate px-12" style="padding-top: 2.3rem;">
+
+     <div class="flex w-full bg-white">
+
+     <div class="min-h-screen  flex flex-row flex-shrink-0">
+         <div class="flex flex-col w-56 bg-[#F8F7F3]  overflow-hidden">
+            <a href="{% url 'blog.home' %}">
+             <div class="flex items-center justify-center h-20 p-2 " >
+                 <img class="mt-4 "  src="{% static 'common/images/banao-3.png' %}"> </img>
+             </div>
+            </a>
+             <ul class="flex flex-col py-4">
+                <li>
+                    <a href="{% url 'blog.home' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                               <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-home"></i></span>
+                               <span class="text-sm font-medium">Home</span>
+                           </a>
+                       </li>
+
+                       {% if profile.category == 'doctor' %}
+                       <li>
+                         <a href="{% url 'blog.my-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-book"></i></span>
+                                    <span class="text-sm font-medium">My Blogs</span>
+                                </a>
+                            </li>
+                            <li>
+                             <a href="{% url 'blog.create-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-plus"></i></span>
+                                        <span class="text-sm font-medium">Create Post</span>
+                                    </a>
+                                </li>
+                       {% endif %}
+                          
+                              
+                   {% if user.is_authenticated %}
+                   <li>
+                       <a href="{% url 'blog.profile' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                  <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-user"></i></span>
+                                  <span class="text-sm font-medium">{{user.email}}</span>
+                              </a>
+                          </li>
+   
+                    <li>
+   
+                        <a href="{% url 'users.logout' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                            <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-log-out"></i></span>
+                            <span class="text-sm font-medium">Logout</span>
+                        </a>
+                    </li>
+                   {% endif %}
+                   
+                
+                
+                    
+
+             </ul>
+         </div>
+     </div>
+        <div class="flex flex-shrink-0  flex-grow">
+            <!-- Add your new div here -->
+            <div class="w-full " style="margin-top: 20px; margin-left: 4rem;">
+                
+                <div class="flex">
+                    <div class="flex-row ml-14 overflow-y-auto hide-scrollbar"  style="width: 70vw; height: 100vh; ">
+                    
+                        <div class="flex flex-col gap-3 sm:gap-5 rounded cursor-pointer mt-10 " style="width: 60vw;">
+                          <div class="mb-3">
+                            <img
+                              src="{{blog.image.url}}"
+                              style="width: 60vw; height: 65vh;"
+                              alt="image"
+                              class="object-contain sm:object-cover object-top w-full sm:h-72 md:h-60 rounded"
+                            />
+                          </div>
+                  
+                          <div>
+                            <p class="text-m font-[500] text-[#7c7c7c]">
+                              {{blog.category}}
+                            </p>
+                            <h2 class="sm:text-xl font-semibold">
+                              <a href=""> {{blog.title}}  </a>
+                            </h2>
+                          </div>
+                  
+                          <div class="flex items-center gap-2">
+                            <div>
+                              <img
+                                src="{{profile.image.url}}"
+                                width= "40"
+                                height="40"
+                                alt="hee"
+                                class="cursor-pointer object-cover object-top rounded-full"
+                              />
+                            </div>
+                            <div>
+                              <p class="cursor-pointer text-sm font-[500]">
+                                {{profile.firstName }} {{profile.lastName}}
+                              </p>
+                              <div className="flex items-center gap-1 mt-1">
+                                <p className="text-[#7c7c7c] text-sm">
+                                  
+                                  {{blog.created_at}}
+                                </p>
+                              </div>
+                            </div>
+                            {% if blog.drafted == True %}
+                            <div class="center relative inline-block select-none whitespace-nowrap rounded-lg bg-amber-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold uppercase leading-none text-black">
+                                <div class="mt-px">Drafted</div>
+                              </div>
+                            {% endif %}
+                          </div>
+                  
+                          <div>
+                            <p class="text-sm sm:text-base">{{ blog.summary}}</p>
+                          </div>
+                          <p class="mb-8 md:text-base text-sm">{{blog.content}}</p>
+                        </div>
+                    
+                    
+                    </div>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

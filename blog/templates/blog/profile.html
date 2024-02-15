@@ -1,4 +1,4 @@
-{% extends "users/base.html" %}
+{% extends "blog/base.html" %}
 {% load static %}
    {% block content%}
 <div class="bg-gradient-to-r
@@ -9,32 +9,58 @@
 
      <div class="flex w-full bg-white">
 
-     <div class="min-h-screen  flex flex-row flex-shrink-0">
-         <div class="flex flex-col w-56 bg-[#F8F7F3]  overflow-hidden">
-            <a href="{% url 'blog.home' %}">
-             <div class="flex items-center justify-center h-20 p-2 " >
-                 <img class="mt-4 "  src="{% static 'common/images/banao-3.png' %}"> </img>
-             </div>
-            </a>
-             <ul class="flex flex-col py-4">
-                
-                {% if user.is_authenticated %}
-                 <li>
-
-                     <a href="{% url 'users.logout' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                         <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-log-out"></i></span>
-                         <span class="text-sm font-medium">Logout</span>
-                     </a>
-                 </li>
-                {% endif %}
-                 <a href="#" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                            <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-user"></i></span>
-                            <span class="text-sm font-medium">{{user.email}}</span>
+        <div class="min-h-screen  flex flex-row flex-shrink-0">
+            <div class="flex flex-col w-56 bg-[#F8F7F3]  overflow-hidden">
+               <a href="{% url 'blog.home' %}">
+                <div class="flex items-center justify-center h-20 p-2 " >
+                    <img class="mt-4 "  src="{% static 'common/images/banao-3.png' %}"> </img>
+                </div>
+               </a>
+                <ul class="flex flex-col py-4">
+                   <li>
+                       <a href="{% url 'blog.home' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                  <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-home"></i></span>
+                                  <span class="text-sm font-medium">Home</span>
+                              </a>
+                          </li>
+                       {% if profile.category == 'doctor' %}
+                       <li>
+                         <a href="{% url 'blog.my-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                    <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-book"></i></span>
+                                    <span class="text-sm font-medium">My Blogs</span>
+                                </a>
+                            </li>
+                            <li>
+                             <a href="{% url 'blog.create-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                        <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-plus"></i></span>
+                                        <span class="text-sm font-medium">Create Post</span>
+                                    </a>
+                                </li>
+                       {% endif %}
+                          
+                              
+                   {% if user.is_authenticated %}
+                   <li>
+                       <a href="{% url 'blog.profile' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                  <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-user"></i></span>
+                                  <span class="text-sm font-medium">{{user.email}}</span>
+                              </a>
+                          </li>
+   
+                    <li>
+   
+                        <a href="{% url 'users.logout' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                            <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-log-out"></i></span>
+                            <span class="text-sm font-medium">Logout</span>
                         </a>
                     </li>
-
-             </ul>
-         </div>
+                   {% endif %}
+                   
+                   
+                       
+   
+                </ul>
+            </div>
      </div>
         <div class="flex flex-shrink-0 mt-20 flex-grow">
             <!-- Add your new div here -->

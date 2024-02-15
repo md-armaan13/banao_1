@@ -1,0 +1,188 @@
+{% extends "blog/base.html" %}
+{% load static %}
+   {% block content%}
+<div class="bg-gradient-to-r
+     from-pink-100
+     via-pink-200
+     to-pink-300
+     background-animate px-12" style="padding-top: 2.3rem;">
+
+     <div class="flex w-full bg-white">
+
+     <div class="min-h-screen  flex flex-row flex-shrink-0">
+         <div class="flex flex-col w-56 bg-[#F8F7F3]  overflow-hidden">
+            <a href="{% url 'blog.home' %}">
+             <div class="flex items-center justify-center h-20 p-2 " >
+                 <img class="mt-4 "  src="{% static 'common/images/banao-3.png' %}"> </img>
+             </div>
+            </a>
+             <ul class="flex flex-col py-4">
+                <li>
+                    <a href="{% url 'blog.home' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                               <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-home"></i></span>
+                               <span class="text-sm font-medium">Home</span>
+                           </a>
+                       </li>
+                    {% if profile.category == 'doctor' %}
+                    <li>
+                      <a href="{% url 'blog.my-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                 <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-book"></i></span>
+                                 <span class="text-sm font-medium">My Blogs</span>
+                             </a>
+                         </li>
+                         <li>
+                          <a href="{% url 'blog.create-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                     <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-plus"></i></span>
+                                     <span class="text-sm font-medium">Create Post</span>
+                                 </a>
+                             </li>
+                    {% endif %}
+                       
+                           
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'blog.profile' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                               <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-user"></i></span>
+                               <span class="text-sm font-medium">{{user.email}}</span>
+                           </a>
+                       </li>
+
+                 <li>
+
+                     <a href="{% url 'users.logout' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                         <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-log-out"></i></span>
+                         <span class="text-sm font-medium">Logout</span>
+                     </a>
+                 </li>
+                {% endif %}
+                
+                
+                    
+
+             </ul>
+         </div>
+     </div>
+        <div class="flex flex-shrink-0 mt-6 flex-grow">
+            <!-- Add your new div here -->
+            <div class="w-full " style="margin-top: 20px; margin-left: 4rem;">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="font-serif font-semibold text-3xl ml-14">My Blogs</div>
+                    </div>
+                    <a href="{% url 'blog.create-blog' %}">
+                    <button type="button" class="text-black bg-fuchsia-200 hover:bg-fuchsia-300 focus:ring-5 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-l px-4 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-14 overflow-hidden shadow-2xl
+                    " style="transition-delay: 0.2s; transition-duration: 0.4s;">
+                        <svg clip-rule="evenodd" class="w-3.5 h-3.5 me-2" fill="currentColor"  aria-hidden="true"  viewBox="0 0 18 21" xmlns="http://www.w3.org/2000/svg"><path d="m11 11h-7.25c-.414 0-.75.336-.75.75s.336.75.75.75h7.25v7.25c0 .414.336.75.75.75s.75-.336.75-.75v-7.25h7.25c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-7.25v-7.25c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" fill-rule="nonzero"/></svg>
+                        Create Blog
+                    </button>
+                </a>
+                </div>
+                <div class="flex mt-5">
+                    <div class="flex-row ml-14 overflow-y-auto hide-scrollbar"  style="width: 40vw; height: 80vh; ">
+
+                    {% for blog in blogs %}
+                   
+                    
+                    <a href="{% url 'blog.detail-blog' %}?id={{blog.id}}" >
+                        <div class="flex flex-col gap-3 sm:gap-5 rounded cursor-pointer mt-10 " style="width: 40vw;">
+                          <div class="mb-3">
+                            <img
+                              src='{{blog.image.url}}'
+                              style="width: 40vw; height: 45vh;"
+                              alt="image"
+                              class="object-contain sm:object-cover object-top w-full sm:h-72 md:h-60 rounded"
+                            />
+                          </div>
+                  
+                          <div>
+                            <p class="text-m font-[500] text-[#7c7c7c]">
+                              {{blog.category}}
+                            </p>
+                            <h2 class="sm:text-xl font-semibold">
+                              <a href="{% url 'blog.detail-blog' %}?id={{blog.id}}"> {{blog.title}} </a>
+                            </h2>
+                          </div>
+                  
+                          <div class="flex items-center gap-2">
+                            <div>
+                              <img
+                                src="{{profile.image.url}}"
+                                width= "40"
+                                height="40"
+                                alt="hee"
+                                class="cursor-pointer object-cover object-top rounded-full"
+                              />
+                            </div>
+                            <div>
+                              <p class="cursor-pointer text-sm font-[500]">
+                                {{profile.firstName }} {{profile.lastName}}
+                              </p>
+                              <div className="flex items-center gap-1 mt-1">
+                                <p className="text-[#7c7c7c] text-sm">{{blog.created_at}}
+                                </p>
+                              </div>
+                            </div>
+                            {% if blog.drafted == True %}
+                            <div class="center relative inline-block select-none whitespace-nowrap rounded-lg bg-amber-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold uppercase leading-none text-black">
+                                <div class="mt-px">Drafted</div>
+                              </div>
+                            {% endif %}
+                          </div>
+                  
+                          <div>
+                            <p class="text-sm sm:text-base">{{ blog.summary}}</p>
+                          </div>
+                          <a
+                            href="{% url 'blog.detail-blog' %}?id={{blog.id}}"
+                            class="block w-fit capitalize rounded-full font-[500] text-indigo-500 hover:text-indigo-600"
+                          >
+                            <span className="flex items-center gap-1 text-sm sm:text-base hover:gap-2 transition-all">
+                              read more
+                            </span>
+                        </a>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    </div>
+                    <div class="bg-[#f7f7f7] text-[#1d1e20] rounded-lg p-8 py-6 mr-12 mt-9  md:h-7/10 lg:h-3/5 " style="position: absolute; right: 1rem; width: 24vw; ">
+                    <h2 class="mb-8 pb-3 text-lg font-semibold border-b border-[#d4d4d4]">
+                      Categories
+                    </h2>
+                    <div>
+                        
+                      <ul class="flex flex-col space-y-5">
+                          
+                            <li class="border-b border-[#d4d4d4] pb-2 mt-1 text-lg hover:text-indigo-500">
+                                <a href="{% url 'blog.my-blog' %}?category=Mental Health">
+                                    Mental Health
+                                </a>
+                             
+                            </li>
+                            <li class="border-b border-[#d4d4d4] pb-2 mt-1 text-lg hover:text-indigo-500">
+                                <a href="{% url 'blog.my-blog' %}?category=Heart Disease">
+                                   Heart Disease
+                                </a>
+                             
+                            </li>
+                            <li class="border-b border-[#d4d4d4] pb-2 mt-1 text-lg hover:text-indigo-500">
+                                <a href="{% url 'blog.my-blog' %}?category=Covid 19">
+                                    Covid 19
+                                </a>
+                             
+                            </li>
+                            <li class="border-b border-[#d4d4d4] pb-2 mt-1 text-lg hover:text-indigo-500">
+                                <a href="{% url 'blog.my-blog' %}?category=Immunization">
+                                    Immunization
+                                </a>
+                             
+                            </li>
+                        
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

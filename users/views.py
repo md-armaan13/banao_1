@@ -6,31 +6,15 @@ from .models import Users , Profile
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+import json
+from django.core import serializers
 
 
-
-def home(request):
-
-    try :
-        if  not request.user.is_authenticated:
-            return redirect('users.login')  
-      
-        context = {}
-        user = request.user
-        context['email'] = user.email
-        profile = Profile.objects.get(user=user)
-        context['profile'] = profile
-        print(context)
-        return render(request,'users/index.html',context)
-      
-    except  Exception as e:
-        print(e)
-        return HttpResponse("ERROR 404 NOT FOUND")
-    
+   
 def login_users(request):
 
     if request.user.is_authenticated:
-        return redirect('users.home')
+        return redirect('blog.home')
     try : 
         if request.method == 'POST':
             
@@ -44,7 +28,7 @@ def login_users(request):
             user = authenticate(request , username=email , password=password)
             if user is not None:
                 login(request , user)
-                return redirect('users.home')
+                return redirect('blog.home')
             else:
                 messages.error(request, 'Invalid Credentials')
                 return redirect('users.login')
@@ -58,7 +42,7 @@ def login_users(request):
 def signup_user(request):
     try:
         if request.user.is_authenticated:
-            return redirect('users.home')
+            return redirect('blog.home')
         
         if request.method == 'POST':
            
