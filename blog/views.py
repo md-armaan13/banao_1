@@ -15,11 +15,13 @@ import os.path
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+from google.oauth2.service_account import Credentials
+import pickle
 
 
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
-
+token_file = os.path.join(os.path.dirname(__file__), "token.json")
 
 def home(request):
 
@@ -256,16 +258,36 @@ def create_appointment(request):
             
             cred_path = os.path.join(
                 os.path.dirname(__file__), "credentials.json")
+
+
+
             creds = None
-           
+
+            if os.path.exists(token_file):
+                with open(token_file, 'rb') as f:
+                    creds = pickle.load(f)
+
+    # If there are no valid credentials, start the OAuth2 flow
             if not creds or not creds.valid:
                 if creds and creds.expired and creds.refresh_token:
                     creds.refresh(Request())
                 else:
-                    flow = InstalledAppFlow.from_client_secrets_file(
-                        cred_path, SCOPES
-                    )
-            creds = flow.run_local_server(port=0)
+                    flow = InstalledAppFlow.from_client_secrets_file(cred_path, SCOPES)
+                    creds = flow.run_local_server(port=0)
+
+                # Save the credentials to the token file
+                with open(token_file, 'wb') as f:
+                    pickle.dump(creds, f)
+           
+            # if not creds or not creds.valid:
+            #     if creds and creds.expired and creds.refresh_token:
+            #         creds.refresh(Request())
+            #     else:
+            #         flow = InstalledAppFlow.from_client_secrets_file(
+            #             cred_path, SCOPES
+            #         )
+            # token_path = os.path.join(os.path.dirname(__file__), "token.json")
+            # creds = Credentials.from_service_account_file(token_path, scopes=SCOPES)
 
 
             service = build("calendar", "v3", credentials=creds)
