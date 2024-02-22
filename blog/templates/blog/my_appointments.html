@@ -1,0 +1,199 @@
+{% extends "blog/base.html" %}
+{% load static %}
+   {% block content%}
+<div class="bg-gradient-to-r
+     from-pink-100
+     via-pink-200
+     to-pink-300
+     background-animate px-12" style="padding-top: 5.3rem;">
+
+     <div class="flex w-full bg-white">
+
+     <div class="min-h-screen  flex flex-row flex-shrink-0">
+         <div class="flex flex-col w-56 bg-[#F8F7F3]  overflow-hidden">
+            <a href="{% url 'blog.home' %}">
+             <div class="flex items-center justify-center h-20 p-2 " >
+                 <img class="mt-4 "  src="{% static 'common/images/banao-3.png' %}"> </img>
+             </div>
+            </a>
+             <ul class="flex flex-col py-4">
+                <li>
+                    <a href="{% url 'blog.home' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                               <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-home"></i></span>
+                               <span class="text-sm font-medium">Home</span>
+                           </a>
+                       </li>
+                    {% if profile.category == 'doctor' %}
+                    <li>
+                      <a href="{% url 'blog.my-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                 <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-book"></i></span>
+                                 <span class="text-sm font-medium">My Blogs</span>
+                             </a>
+                         </li>
+                         <li>
+                          <a href="{% url 'blog.create-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                     <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-plus"></i></span>
+                                     <span class="text-sm font-medium">Create Post</span>
+                                 </a>
+                             </li>
+                    {% endif %}
+                    
+                    {% if profile.category == 'patient' %}
+
+                    <li>
+                      <a href="{% url 'blog.blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                 <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-book"></i></span>
+                                 <span class="text-sm font-medium">Blogs</span>
+                             </a>
+                         </li>
+                        
+
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'blog.appointment' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-grid"></i></span>
+                                   <span class="text-sm font-medium">My Appointments</span>
+                               </a>
+                           </li>
+                           
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'blog.profile' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                               <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-user"></i></span>
+                               <span class="text-sm font-medium">{{profile.username}}</span>
+                           </a>
+                       </li>
+
+                 <li>
+
+                     <a href="{% url 'users.logout' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                         <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-log-out"></i></span>
+                         <span class="text-sm font-medium">Logout</span>
+                     </a>
+                 </li>
+                 
+                {% endif %}
+
+             </ul>
+         </div>
+     </div>
+        <div class="flex flex-shrink-0 mt-8 flex-grow">
+
+            <div class="w-full " style="margin-top: 20px; margin-left: 4rem;">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="font-serif font-semibold text-3xl ml-14">Your Appointments</div>
+                    </div>
+
+                    
+                </div>
+                <div class="flex mt-8">
+                    <div class="flex-row ml-14 overflow-y-auto hide-scrollbar"  style="width: 60vw; height: 80vh; ">
+                   
+                    
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+
+    {% if profile.category == 'patient' %}
+
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+              <th scope="col" class="px-6 py-3">
+                  Doctor Name
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Appointment Date
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Appointment Time
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Duration
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Appointment End Time
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+
+        {% for appointment in appointments %}
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Dr. {{appointment.doctor.profile.firstName}} {{appointment.doctor.profile.lastName}}
+              </th>
+              <td class="px-6 py-4">
+                  {{appointment.start_date}}
+              </td>
+              <td class="px-6 py-4">
+                 {{appointment.start_time}}
+              </td>
+              <td class="px-6 py-4">
+                  45 min
+              </td>
+              <td class="px-6 py-4">
+                  {{appointment.end_time}}
+              </td>
+          </tr>
+          {% endfor %}
+          
+      </tbody>
+      {% endif %}
+
+      {% if profile.category == 'doctor' %}
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                Patient Name
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Appointment Date
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Appointment Time
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Duration
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Appointment End Time
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for appointment in appointments %}
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{appointment.patient.profile.firstName}} {{appointment.patient.profile.lastName}}
+              </th>
+              <td class="px-6 py-4">
+                  {{appointment.start_date}}
+              </td>
+              <td class="px-6 py-4">
+                 {{appointment.start_time}}
+              </td>
+              <td class="px-6 py-4">
+                  45 min
+              </td>
+              <td class="px-6 py-4">
+                  {{appointment.end_time}}
+              </td>
+          </tr>
+          {% endfor %}
+          
+      </tbody>
+    {% endif %}
+      
+  </table>
+</div>
+
+                   
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

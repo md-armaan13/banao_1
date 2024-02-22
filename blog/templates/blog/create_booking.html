@@ -1,0 +1,187 @@
+{% extends "blog/base.html" %}
+{% load static %}
+   {% block content%}
+<div class="bg-gradient-to-r
+     from-pink-100
+     via-pink-200
+     to-pink-300
+     background-animate px-12" style="padding-top: 5.3rem;">
+
+     <div class="flex w-full bg-white">
+
+     <div class="min-h-screen  flex flex-row flex-shrink-0">
+         <div class="flex flex-col w-56 bg-[#F8F7F3]  overflow-hidden">
+            <a href="{% url 'blog.home' %}">
+             <div class="flex items-center justify-center h-20 p-2 " >
+                 <img class="mt-4 "  src="{% static 'common/images/banao-3.png' %}"> </img>
+             </div>
+            </a>
+             <ul class="flex flex-col py-4">
+                <li>
+                    <a href="{% url 'blog.home' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                               <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-home"></i></span>
+                               <span class="text-sm font-medium">Home</span>
+                           </a>
+                       </li>
+                    {% if profile.category == 'doctor' %}
+                    <li>
+                      <a href="{% url 'blog.my-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                 <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-book"></i></span>
+                                 <span class="text-sm font-medium">My Blogs</span>
+                             </a>
+                         </li>
+                         <li>
+                          <a href="{% url 'blog.create-blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                     <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-plus"></i></span>
+                                     <span class="text-sm font-medium">Create Post</span>
+                                 </a>
+                             </li>
+                    {% endif %}
+                       
+                           
+                {% if user.is_authenticated %}
+                <li>
+                  <a href="{% url 'blog.blog' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                             <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-book"></i></span>
+                             <span class="text-sm font-medium">Blogs</span>
+                         </a>
+                     </li>
+                     <li>
+                      <a href="{% url 'blog.appointment' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                                 <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-grid"></i></span>
+                                 <span class="text-sm font-medium">My Appointments</span>
+                             </a>
+                         </li>
+
+                <li>
+                    <a href="{% url 'blog.profile' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                               <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-user"></i></span>
+                               <span class="text-sm font-medium">{{profile.username}}</span>
+                           </a>
+                       </li>
+
+                 <li>
+                  
+
+                 <li>
+
+                     <a href="{% url 'users.logout' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                         <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-log-out"></i></span>
+                         <span class="text-sm font-medium">Logout</span>
+                     </a>
+                 </li>
+                {% endif %}
+
+             </ul>
+         </div>
+     </div>
+                
+                <div class="flex flex-shrink-0 mt-20 flex-grow">
+                  
+                  <div class="w-full " style="margin-top: 20px; margin-left: 6rem;">
+                      <div class="flex justify-between items-center">
+                          <div class="flex items-center">
+                              <div class="font-serif font-semibold text-3xl ">Book Your Appointment</div>
+                          </div>
+                          
+                      </div>
+                      <div class="flex mt-5" >
+                          <div class="text-[#1d1e20]">
+                          <form id="appointmentForm"  class="flex flex-col gap-1 " style="height: auto; width: 40vw;" 
+                          action="" method="post" enctype="multipart/form-data"
+                          onsubmit="return false;"
+                          >
+                          {% csrf_token %}
+                            <h2 class="text-2l font-semibold mb-1" >Explain How are you Feeling.</h2>
+                            <div
+                              class="bg-[#dedede] text-[#1d1e20]">
+                              <textarea ref="text" name="content" placeholder="start writing here..." rows="5" class="bg-transparent resize-y w-full border-0 outline-none rounded-lg py-3 px-4"></textarea>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-2 mt-2">
+                              <label for="appointmentDate" class="text-2l font-semibold mb-1 mt-4 pl-5">Appointment Date :</label>
+                              <div onclick="focusInput('appointmentDate')">
+                                  <input
+                                      id="appointmentDate"
+                                      type="date"
+                                      name="date"
+                                      placeholder="Appointment Date"
+                                      class="bg-[#dedede] text-[#1d1e20] w-full border-0 outline-none rounded-lg p-4"
+                                  />
+                              </div>
+                              <label for="appointmentTime" class="text-2l font-semibold mb-1 mt-4 pl-5">Appointment Time :</label>
+                              <div onclick="focusInput('appointmentTime')">
+                                  <input
+                                      id="appointmentTime"
+                                      type="time"
+                                      name="time"
+                                      placeholder="Appointment Time"
+                                      class="bg-[#dedede] w-full border-0 outline-none rounded-lg p-4"
+                                  />
+                              </div>
+                          </div>
+                          
+                            <div class="grid md:grid-cols-2 gap-2 mt-2">
+                              <label for="appointmentTime" class="text-2l font-semibold mb-1 mt-4 pl-5">Required Speciality : </label>
+                              <select
+                                
+                                  name="category"
+                                  class="bg-[#dedede] text-[#1d1e20] resize-y w-full border-0 outline-none rounded-lg p-4"
+                              >
+                                  
+                                  <option value="Mental Health">Heart Specialist </option>
+                                  <option value="Heart Disease">Surgeon</option>
+                                  <option value="Covid 19">General Physician</option>
+                                  <option value="Immunization">Skin Speacialist</option>
+                                  <option value="Pediatrician">Pediatrician</option>
+                                  <option value="Gynecologist">Gynecologist</option>
+                                  
+                              </select>
+                             
+                          </div>                    
+                           
+                            <div class="mt-5 flex justify-end">
+                              <button type="submit" onclick="submitForm()" class="text-black bg-fuchsia-200 hover:bg-fuchsia-300 focus:ring-5 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-l px-5 py-3.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  overflow-hidden shadow-2xl mb-3
+                          " style="transition-delay: 0.2s; transition-duration: 0.4s ;">
+                                Book Appointment
+                          </button>
+                            </div>
+                          </form>
+                        </div>
+              </div>
+                  </div>
+                </div>
+    </div>
+
+    <script>
+      function focusInput(id) {
+          var input = document.getElementById(id);
+          input.focus(); 
+          input.click(); 
+      }
+  
+    
+      function validateDateTime() {
+          var currentDate = new Date();
+          var selectedDate = new Date(document.getElementById('appointmentDate').value);
+          var selectedTime = new Date('1970-01-01T' + document.getElementById('appointmentTime').value);
+  
+          // Combine date and time
+          selectedDate.setHours(selectedTime.getHours());
+          selectedDate.setMinutes(selectedTime.getMinutes());
+  
+          if (selectedDate <= currentDate) {
+              alert("Please select a date and time greater than the current date and time.");
+              return false;
+          }
+          return true;
+      }
+  
+     
+      function submitForm() {
+          if (validateDateTime()) {
+              document.getElementById("appointmentForm").submit();
+          }
+      }
+  </script>
+  
+{% endblock content %}
